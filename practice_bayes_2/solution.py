@@ -5,18 +5,11 @@
 def total_probability(priors: list[float], conditionals: list[float]) -> float:
     """Return P(B) using the Law of Total Probability, rounded to 4 decimal places."""
     # TODO
-    prob_B = 0
-    for prior in priors:
-        for conditional in conditionals:
-            prob_B += prior * conditional
-    return prior
+    return -1.0
 
 
 def most_likely_cause(priors: list[float], conditionals: list[float]) -> int:
     """Return the 0-based index of A_i with the highest posterior P(A_i | B).
     Break ties by returning the smaller index."""
     # TODO
-    prob = total_probability(priors, conditionals)
-    
-
     return -1
