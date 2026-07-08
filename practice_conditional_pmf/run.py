@@ -110,15 +110,14 @@ HIDDEN_TESTS = [
          compute_conditional_pmf([(0,1),(0,1),(2,0)], 1, [0,1,2]),
          [1.0, 0.0, 0.0])),
     ("Randomized stress (20 cases)",
-     lambda: all(
+     lambda: (random.seed(7), all(
          approx_equal(
              compute_conditional_pmf(s, y, [0,1,2,3]),
              _ref(s, y, [0,1,2,3]))
          for s, y in [
-             (random.seed(7) or None, None) or
              ([(random.randint(0,3), random.randint(0,2)) for _ in range(random.randint(10,200))],
               random.randint(0,2))
-             for _ in range(20)])),
+             for _ in range(20)]))[1]),
 ]
 
 # ── main ──────────────────────────────────────────────────────────────────────
