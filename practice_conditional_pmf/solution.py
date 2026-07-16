@@ -13,20 +13,33 @@ def compute_conditional_pmf(samples: list[tuple[int, int]],
                              y_target: int,
                              x_values: list[int]) -> list[float]:
     # TODO
-    output = []
-    num_tuples = len(samples)
-    num_y_target = 0
+   ## Handle Exception
+    y_list = [t[1] for t in samples]
+    if y_target not in y_list:
+        return [0] * len(x_values)
+    ## probability of y:
+    count = 0
     for t in samples:
         if t[1] == y_target:
-            num_y_target += 1
-    if num_y_target == 0:
-        return [0.0] * len(x_values)
-    prob_y = num_y_target / num_tuples
-    x_and_y = 0
+            count += 1
+    prob_y = count / len(samples)
+    ## probability of x and y
+    prob_x_and_y = []
     for x in x_values:
+        count = 0
         for t in samples:
             if t[0] == x and t[1] == y_target:
-                x_and_y += 1
-        output.append(x_and_y /num_y_target)
-        x_and_y = 0
+                count += 1
+        prob = count / len(samples)
+        prob_x_and_y.append(prob)
+    ##output list
+    output = []
+    for prob in prob_x_and_y:
+        conditional = prob/ prob_y
+        output.append(conditional)
+    
     return output
+    
+
+    
+    
